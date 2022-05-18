@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,7 @@ public class EditServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EntityManager em = DBUtil.createEntitymanager();
+        EntityManager em = DBUtil.createEntityManager();
 
         Message m = em.find(Message.class, Integer.parseInt(request.getParameter("id")));
 
@@ -42,7 +43,9 @@ public class EditServlet extends HttpServlet {
         request.setAttribute("_token", request.getSession().getId());
 
         request.getSession().setAttribute("message_id", m.getId());
-
+        
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/messages/edit.jsp");
+        rd.forward(request, response);
 
         response.getWriter().append("Served at: ").append(request.getContextPath());
     }
