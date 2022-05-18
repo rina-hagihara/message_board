@@ -16,14 +16,14 @@ import utill.DBUtil;
 /**
  * Servlet implementation class showServlet
  */
-@WebServlet(name = "ShowServlet", urlPatterns = { "/show" })
-public class showServlet extends HttpServlet {
+@WebServlet( "/show" )
+public class ShowServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public showServlet() {
+    public ShowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,13 +40,10 @@ public class showServlet extends HttpServlet {
 
         request.setAttribute("message",  m);
 
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/messages/show.jsp");
-
-
-
-
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/show.jsp");
         rd.forward(request, response);
+
+
     }
 
 }
